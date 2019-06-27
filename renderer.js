@@ -30,7 +30,7 @@ function download(url, title){
   let arguments = [];
   arguments.push(url);
 
-  const fileName = title || '%(title)s.%(ext)s';
+  const fileName = title || '%(title)s';
 
   arguments.push('-o', `videos/${fileName}.%(ext)s`);
 
