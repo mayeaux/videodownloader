@@ -136,21 +136,23 @@ function myFunction() {
   var youtubeUrlValue = youtubeUrl.value;
 
 
-  // Example of filtering the formats to audio only.
-  ytdl.getInfo(youtubeUrlValue, (err, info) => {
-    if (err) console.log(err);
-    console.log(info);
 
-    // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
-    // console.log('Formats with only audio: ' + audioFormats.length);
-
-    saveAsTitle.value = info.title;
-
-  });
 
   navigator.clipboard.readText()
     .then(text => {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
+
+      // Example of filtering the formats to audio only.
+      ytdl.getInfo(text, (err, info) => {
+        if (err) return console.log(err);
+        console.log(info);
+
+        // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
+        // console.log('Formats with only audio: ' + audioFormats.length);
+
+        saveAsTitle.value = info.title;
+
+      });
 
     })
     .catch(err => {
