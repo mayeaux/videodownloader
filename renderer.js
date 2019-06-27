@@ -20,16 +20,28 @@ if (!fs.existsSync(dir)){
 function download(url, title, downloadAsAudio){
 
   let arguments = [];
+
+  // set the url for ytdl
   arguments.push(url);
 
+  // verbose output
   arguments.push('-v');
 
+  // keep video
+  arguments.push('-k');
+
+  // verbose output
+  arguments.push('-f', 'best');
+
+  // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
+  // save to videos directory
   arguments.push('-o', `videos/${fileName}.%(ext)s`);
 
   console.log(arguments);
 
+  // download as audio if needed
   if(downloadAsAudio){
     console.log('Download as audio');
     arguments.push('-x');
