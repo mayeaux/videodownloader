@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@microlink/youtube-dl": "^2.0.0",
-    "youtube-dl": "^2.0.0"
+    "fluent-ffmpeg": "^2.1.2",
+    "youtube-dl": "^2.0.0",
+    "ytdl-core": "^0.29.2"
   }
 }
