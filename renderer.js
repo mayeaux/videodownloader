@@ -19,9 +19,6 @@ if (!fs.existsSync(dir)){
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
 function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
-  youtubeUrl.value = '';
-  saveAsTitleValue.value = '';
-
   let arguments = [];
 
   // set the url for ytdl
@@ -67,10 +64,19 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   });
 
   ls.on('close', (code) => {
+
+    youtubeUrl.value = '';
+    saveAsTitleValue.value = '';
+
     // downloaded++;// if(downloaded == needsToDownload){
     //   downloading = false;
     //   console.log('no longer downloading');
     // }
+
+    if(code == 0){
+      percentage.innerText = 'Download completed';
+    }
+
     console.log(`child process exited with code ${code}`);
   });
 
