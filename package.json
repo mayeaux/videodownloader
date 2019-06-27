@@ -18,5 +18,9 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^5.0.5"
+  },
+  "dependencies": {
+    "@microlink/youtube-dl": "^2.0.0",
+    "youtube-dl": "^2.0.0"
   }
 }
