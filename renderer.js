@@ -8,33 +8,32 @@ const ytdl = require('ytdl-core');
 const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
 
-
+// create videos file if doesn't exist
 var dir = './videos';
 
 if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
 
-dir = '../videos';
-
-if (!fs.existsSync(dir)){
-  fs.mkdirSync(dir);
-}
-
-var percentage = document.getElementsByClassName('percentage')[0];
-
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
-function download(url, title){
+function download(url, title, downloadAsAudio){
 
   let arguments = [];
   arguments.push(url);
+
+  arguments.push('-v');
 
   const fileName = title || '%(title)s';
 
   arguments.push('-o', `videos/${fileName}.%(ext)s`);
 
   console.log(arguments);
+
+  if(downloadAsAudio){
+    console.log('Download as audio');
+    arguments.push('-x');
+  }
 
   const ls = spawn('node_modules/youtube-dl/bin/youtube-dl', arguments);
 
@@ -67,6 +66,8 @@ function download(url, title){
 var startDownload = document.getElementsByClassName('startDownload')[0];
 var percentage = document.getElementsByClassName('percentage')[0];
 var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
+var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
+
 
 var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
 
@@ -83,11 +84,17 @@ startDownload.onclick = function(){
 
   var youtubeUrlValue = youtubeUrl.value;
   var saveAsTitleValue = saveAsTitle.value;
+  var downloadAsAudioValue = downloadAsAudio.checked;
+  download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue);
 
-  download(youtubeUrlValue, saveAsTitleValue);
+};
 
-}
 
+
+
+
+
+// frontend code
 function myFunction() {
 
   navigator.clipboard.readText()
