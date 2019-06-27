@@ -17,7 +17,10 @@ if (!fs.existsSync(dir)){
 
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
-function download(url, title, downloadAsAudio){
+function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
+
+  youtubeUrl.value = '';
+  saveAsTitleValue.value = '';
 
   let arguments = [];
 
@@ -72,18 +75,18 @@ function download(url, title, downloadAsAudio){
   });
 
 }
-
-
-
+// start download button
 var startDownload = document.getElementsByClassName('startDownload')[0];
-var percentage = document.getElementsByClassName('percentage')[0];
-var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
-var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
 
 
-var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
-
+// open folder button
 var openFolder = document.getElementsByClassName('openFolder')[0];
+
+
+// percentage div
+var percentage = document.getElementsByClassName('percentage')[0];
+
+
 
 openFolder.onclick = function(){
   shell.openItem('./videos');
@@ -94,10 +97,15 @@ const {shell} = require('electron');
 
 startDownload.onclick = function(){
 
+  var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
+  var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
+  var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
+
   var youtubeUrlValue = youtubeUrl.value;
   var saveAsTitleValue = saveAsTitle.value;
   var downloadAsAudioValue = downloadAsAudio.checked;
-  download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue);
+
+  download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue, youtubeUrl, saveAsTitle);
 
 };
 
