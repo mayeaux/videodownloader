@@ -26,7 +26,15 @@ var percentage = document.getElementsByClassName('percentage')[0];
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
 function download(url){
-  const ls = spawn('node_modules/youtube-dl/bin/youtube-dl', ['-f' , '251', url]);
+
+  let arguments = [];
+  arguments.push(url);
+
+  arguments.push('-o', 'videos/%(title)s.%(ext)s');
+
+  console.log(arguments);
+
+  const ls = spawn('node_modules/youtube-dl/bin/youtube-dl', arguments);
 
   ls.stdout.on('data', (data) => {
     percentage.innerText = data;
@@ -77,3 +85,16 @@ thinger.onclick = function(){
 
 }
 
+function myFunction() {
+
+  navigator.clipboard.readText()
+    .then(text => {
+      document.getElementsByClassName("youtubeUrl")[0].value = text;
+
+    })
+    .catch(err => {
+      document.getElementById("demo").innerHTML = 'Failed to read clipboard contents: '+err;
+    });
+
+
+}
