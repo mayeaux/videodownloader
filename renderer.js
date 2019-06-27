@@ -25,12 +25,14 @@ var percentage = document.getElementsByClassName('percentage')[0];
 
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
-function download(url){
+function download(url, title){
 
   let arguments = [];
   arguments.push(url);
 
-  arguments.push('-o', 'videos/%(title)s.%(ext)s');
+  const fileName = title || '%(title)s.%(ext)s';
+
+  arguments.push('-o', `videos/${fileName}.%(ext)s`);
 
   console.log(arguments);
 
@@ -62,7 +64,7 @@ function download(url){
 
 
 
-var thinger = document.getElementsByClassName('fred')[0];
+var startDownload = document.getElementsByClassName('startDownload')[0];
 var percentage = document.getElementsByClassName('percentage')[0];
 var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
 
@@ -77,11 +79,12 @@ openFolder.onclick = function(){
 const {shell} = require('electron');
 
 
-thinger.onclick = function(){
+startDownload.onclick = function(){
 
   var youtubeUrlValue = youtubeUrl.value;
+  var saveAsTitleValue = saveAsTitle.value;
 
-  download(youtubeUrlValue);
+  download(youtubeUrlValue, saveAsTitleValue);
 
 }
 
