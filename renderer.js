@@ -8,6 +8,7 @@ const ytdl = require('ytdl-core');
 const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
 
+
 // create videos file if doesn't exist
 var dir = './videos';
 
@@ -113,6 +114,8 @@ startDownload.onclick = function(){
 
   download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue, youtubeUrl, saveAsTitle);
 
+
+
 };
 
 
@@ -122,6 +125,28 @@ startDownload.onclick = function(){
 
 // frontend code
 function myFunction() {
+
+  var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
+  var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
+  var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
+
+  // var saveAsTitleValue = saveAsTitle.value;
+
+
+  var youtubeUrlValue = youtubeUrl.value;
+
+
+  // Example of filtering the formats to audio only.
+  ytdl.getInfo(youtubeUrlValue, (err, info) => {
+    if (err) console.log(err);
+    console.log(info);
+
+    // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
+    // console.log('Formats with only audio: ' + audioFormats.length);
+
+    saveAsTitle.value = info.title;
+
+  });
 
   navigator.clipboard.readText()
     .then(text => {
