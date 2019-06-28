@@ -162,20 +162,21 @@ function myFunction() {
     .then(text => {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
-      // Example of filtering the formats to audio only.
+      // Optional arguments passed to youtube-dl.
+      var options = ['-f' , 'bestvideo'];
+      youtubedl.getInfo(text, options, function(err, info) {
+        if (err) throw err;
 
+        saveAsTitle.value = info.title;
 
-      //
-      // ytdl.getInfo(text, (err, info) => {
-      //   if (err) return console.log(err);
-      //   console.log(info);
-      //
-      //   // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
-      //   // console.log('Formats with only audio: ' + audioFormats.length);
-      //
-      //   saveAsTitle.value = info.title;
-      //
-      // });
+        console.log('id:', info.id);
+        console.log('title:', info.title);
+        console.log('url:', info.url);
+        console.log('thumbnail:', info.thumbnail);
+        console.log('description:', info.description);
+        console.log('filename:', info._filename);
+        console.log('format id:', info.format_id);
+      });
 
     })
     .catch(err => {
@@ -197,19 +198,3 @@ function myFunction() {
 // }
 //
 //
-
-// var url = 'http://www.youtube.com/watch?v=WKsjaOqDXgg'
-var url = 'https://www.brighteon.com/6053103906001'
-// Optional arguments passed to youtube-dl.
-var options = ['-f' , 'bestvideo'];
-youtubedl.getInfo(url, options, function(err, info) {
-  if (err) throw err;
-
-  console.log('id:', info.id);
-  console.log('title:', info.title);
-  console.log('url:', info.url);
-  console.log('thumbnail:', info.thumbnail);
-  console.log('description:', info.description);
-  console.log('filename:', info._filename);
-  console.log('format id:', info.format_id);
-});
