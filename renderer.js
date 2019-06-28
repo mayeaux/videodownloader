@@ -283,6 +283,22 @@ function myFunction() {
 
 }
 
+// frontend code
+function myChannelFunction() {
+
+  navigator.clipboard.readText()
+    .then(text => {
+      document.getElementsByClassName("youtubeChannelUrl")[0].value = text;
+
+    })
+    .catch(err => {
+      console.log(err);
+
+    });
+
+
+}
+
 // const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
 //   var path1 = dialog.showOpenDialog({
 //     defaultPath: './videos',
