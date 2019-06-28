@@ -39,7 +39,10 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
-  const filePath = '/Users/anthony/Development/ytdldesktop/thinger/electron-quick-start/videos/Nick Fuentes';
+  // const filePath = '/Users/anthony/Development/ytdldesktop/thinger/electron-quick-start/videos/Keemstar';
+
+  const filePath = __dirname + '/videos';
+
 
   // save to videos directory
   arguments.push('-o', `${filePath}/${fileName}.%(ext)s`);
@@ -166,9 +169,12 @@ function myFunction() {
 
 }
 
-var path1 = dialog.showOpenDialog({
-  defaultPath: './videos',
-  properties: ['openDirectory']
-});
+const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
+  var path1 = dialog.showOpenDialog({
+    defaultPath: './videos',
+    properties: ['openDirectory']
+  });
 
-console.log(path1);
+  console.log(path1);
+}
+
