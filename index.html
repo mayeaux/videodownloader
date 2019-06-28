@@ -3,57 +3,88 @@
   <head>
     <meta charset="UTF-8">
     <title>YouTube Downloader</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   </head>
   <body>
-    <h1>Video Downloader</h1>
+    <div class="sup" style="text-align:center">
 
-    <h2>Download Video</h2>
+      <!-- HEADEDR INFO -->
 
-    <label for="">Video Url</label>
-    <input type="text" class="youtubeUrl" value="https://www.youtube.com/watch?v=ZcAiayke00I" style="width:270px"><button onclick="myFunction()">Paste</button>
-    <br>
-    <br>
-    <label for="">Save As Title</label>
-    <input type="text" class="saveAsTitle" value=""  style="width:450px">
-    <br>
-    <br>
+      <h1 style="margin-top: 30px;margin-bottom: 18px;">Video Downloader</h1>
 
-    <!--<label for="" style="font-size: 12px">Custom Directory (Optional)</label>-->
-    <!--<button class="selectVideoDirectory">Select Directory</button>-->
-    <!--<br>-->
-    <!--<br>-->
+      <a href="https://ytdl-org.github.io/youtube-dl/supportedsites.html" target="_blank"><p>110 Sites Supported</p></a>
 
-    <label for="">Download As Audio</label>
-    <input type="checkbox" class="downloadAsAudio">
-
-    <br>
-    <br>
-    <button class="startDownload">Start Download</button>
+      <a href="https://github.com/mayeaux/videodownloader" target="_blank" style="color:black"><p style="font-size:12px">Code available at mayeaux/videodownloader</p></a>
 
 
-    <br>
-    <br>
+      <br>
 
-    <h2>YouTube Channel Downloader</h2>
+      <!-- DOWNLOAD VIDEO SECTION -->
 
-    <label for="">Channel Url</label>
-    <input type="text" class="youtubeChannelUrl" value="https://www.youtube.com/user/NewDramaAlert" style="width:270px"><button onclick="myChannelFunction()">Paste</button>
-    <br>
-    <br>
-    <label for="">Download As Audio</label>
-    <input type="checkbox" class="downloadChannelAsAudio">
-    <br>
+      <h2 style="margin-bottom:16px;">Download Video</h2>
+
+      <label style="font-size:22px" for="">Video Url</label>
+      <br>
+      <input type="text" class="youtubeUrl" value="https://www.youtube.com/watch?v=ZcAiayke00I" style="width:450px;text-align:center">
+
+      <br>
+
+      <button type="button" onclick="myFunction()" class="btn btn-primary" style="margin-top:7px;margin-bottom:32px;">Paste</button>
+
+      <br>
+
+      <label style="font-size:22px" for="">Save As Title</label>
+      <br>
+      <input type="text" class="saveAsTitle" value=""  style="width:420px">
+      <br>
+
+      <!-- SELECT DIRECTORY SECTION -->
+
+      <!--<label for="" style="font-size: 12px">Custom Directory (Optional)</label>-->
+      <!--<button class="selectVideoDirectory">Select Directory</button>-->
+      <!--<br>-->
+      <!--<br>-->
+
+      <label for="">Download As Audio</label>
+      <input type="checkbox" class="downloadAsAudio">
+
+      <br>
+      <button class="startDownload btn btn-success">Start Download</button>
+      <br>
+      <h4 class="percentage" style="height:70px;overflow:hidden;margin-top:30px;">Status: Download Hasn't Started Yet</h4>
+
+       <!--YOUTUBE DOWNLOADER-->
+
+      <!--<br>-->
+      <!--<br>-->
 
 
-    <br>
-    <button class="startChannelDownload">Start Downloading Channel</button>
-    <br>
+      <!--<br>-->
+      <!--<br>-->
 
-    <br>
+      <!--<h2>YouTube Channel Downloader</h2>-->
 
-    <h3 class="percentage">Status: Download Hasn't Started Yet</h3>
+      <!--<label for="">Channel Url</label>-->
+      <!--<input type="text" class="youtubeChannelUrl" value="https://www.youtube.com/user/NewDramaAlert" style="width:270px"><button onclick="myChannelFunction()">Paste</button>-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<label for="">Download As Audio</label>-->
+      <!--<input type="checkbox" class="downloadChannelAsAudio">-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<button class="startChannelDownload btn btn-success" style="margin-bottom:73px">Start Downloading Channel</button>-->
 
-    <button class="openFolder">Open Videos Folder</button>
+      <!--<br>-->
+
+      <button class="openFolder btn btn-info">Open Videos Folder</button>
+      <br>
+      <br>
+      <br>
+
+
+    </div>
 
 
     <!--console.log('Download started');-->
