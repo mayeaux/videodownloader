@@ -33,7 +33,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   arguments.push('-v');
 
   // keep video
-  arguments.push('-k');
+  // arguments.push('-k');
 
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
@@ -44,7 +44,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   if(downloadAsAudio){
     arguments.push('bestaudio');
   } else {
-    arguments.push('bestvideo');
+    arguments.push('best');
   }
 
   // // verbose output
@@ -151,7 +151,7 @@ function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTit
   arguments.push('-v');
 
   // keep video
-  arguments.push('-k');
+  // arguments.push('-k');
 
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
@@ -162,7 +162,7 @@ function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTit
   if(downloadAsAudio){
     arguments.push('bestaudio');
   } else {
-    arguments.push('bestvideo');
+    arguments.push('best');
   }
 
   // // verbose output
