@@ -140,7 +140,7 @@ startDownload.onclick = function(){
 };
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
-function downloadChannel(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
+function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   let arguments = [];
 
@@ -168,15 +168,15 @@ function downloadChannel(url, title, downloadAsAudio, youtubeUrl, saveAsTitleVal
   // // verbose output
 
   // title is that passed or the one from youtube
-  const fileName = title || '%(title)s';
+  const fileName = '%(title)s';
 
   // const filePath = '/Users/anthony/Development/ytdldesktop/thinger/electron-quick-start/videos/Keemstar';
 
-  const filePath = __dirname + '/videos';
+  const filePath = __dirname + '/videos/';
 
 
   // save to videos directory
-  arguments.push('-o', `${filePath}/${fileName}.%(ext)s`);
+  arguments.push('-o', `${filePath}/%(uploader)s/${fileName}.%(ext)s`);
 
   console.log(arguments);
 
@@ -232,7 +232,7 @@ startChannelDownload.onclick = function(){
   var youtubeChannelUrlValue = youtubeChannelUrl.value;
   var downloadChannelAsAudioValue = downloadChannelAsAudio.checked;
 
-  downloadChannel(youtubeChannelUrl, youtubeChannelUrlValue, downloadChannelAsAudioValue, youtubeChannelUrl, '');
+  downloadChannel(youtubeChannelUrlValue, youtubeChannelUrlValue, downloadChannelAsAudioValue, youtubeChannelUrl, '');
 
 };
 
@@ -262,14 +262,15 @@ function myFunction() {
         if (err) throw err;
 
         saveAsTitle.value = info.title;
+        console.log(info);
 
-        console.log('id:', info.id);
-        console.log('title:', info.title);
-        console.log('url:', info.url);
-        console.log('thumbnail:', info.thumbnail);
-        console.log('description:', info.description);
-        console.log('filename:', info._filename);
-        console.log('format id:', info.format_id);
+        // console.log('id:', info.id);
+        // console.log('title:', info.title);
+        // console.log('url:', info.url);
+        // console.log('thumbnail:', info.thumbnail);
+        // console.log('description:', info.description);
+        // console.log('filename:', info._filename);
+        // console.log('format id:', info.format_id);
       });
 
     })
