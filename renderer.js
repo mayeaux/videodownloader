@@ -7,6 +7,8 @@ const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
 const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
+
+
 const {dialog} = require('electron').remote;
 
 
@@ -161,31 +163,53 @@ function myFunction() {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
       // Example of filtering the formats to audio only.
-      ytdl.getInfo(text, (err, info) => {
-        if (err) return console.log(err);
-        console.log(info);
 
-        // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
-        // console.log('Formats with only audio: ' + audioFormats.length);
 
-        saveAsTitle.value = info.title;
-
-      });
+      //
+      // ytdl.getInfo(text, (err, info) => {
+      //   if (err) return console.log(err);
+      //   console.log(info);
+      //
+      //   // let audioFormats = ytdl.filterFormats(info.formats, 'audioonly');
+      //   // console.log('Formats with only audio: ' + audioFormats.length);
+      //
+      //   saveAsTitle.value = info.title;
+      //
+      // });
 
     })
     .catch(err => {
-      document.getElementById("demo").innerHTML = 'Failed to read clipboard contents: '+err;
+      console.log(err);
+
+      // document.getElementById("demo").innerHTML = 'Failed to read clipboard contents: '+err;
     });
 
 
 }
 
-const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
-  var path1 = dialog.showOpenDialog({
-    defaultPath: './videos',
-    properties: ['openDirectory']
-  });
+// const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
+//   var path1 = dialog.showOpenDialog({
+//     defaultPath: './videos',
+//     properties: ['openDirectory']
+//   });
+//
+//   console.log(path1);
+// }
+//
+//
 
-  console.log(path1);
-}
+// var url = 'http://www.youtube.com/watch?v=WKsjaOqDXgg'
+var url = 'https://www.brighteon.com/6053103906001'
+// Optional arguments passed to youtube-dl.
+var options = ['-f' , 'bestvideo'];
+youtubedl.getInfo(url, options, function(err, info) {
+  if (err) throw err;
 
+  console.log('id:', info.id);
+  console.log('title:', info.title);
+  console.log('url:', info.url);
+  console.log('thumbnail:', info.thumbnail);
+  console.log('description:', info.description);
+  console.log('filename:', info._filename);
+  console.log('format id:', info.format_id);
+});
