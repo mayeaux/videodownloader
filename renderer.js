@@ -37,14 +37,16 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
-  arguments.push('-f');
+  // arguments.push('-f');
 
 
   // select download as audio or video
   if(downloadAsAudio){
+    arguments.push('-f');
+
     arguments.push('bestaudio');
   } else {
-    arguments.push('best');
+    // arguments.push('best');
   }
 
   // // verbose output
@@ -155,14 +157,17 @@ function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTit
 
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
-  arguments.push('-f');
+  // arguments.push('-f');
 
 
   // select download as audio or video
   if(downloadAsAudio){
+    arguments.push('-f');
+
+
     arguments.push('bestaudio');
   } else {
-    arguments.push('best');
+    // arguments.push('best');
   }
 
   // // verbose output
