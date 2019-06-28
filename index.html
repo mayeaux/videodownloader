@@ -20,24 +20,31 @@
 
 
       <br>
+      <br>
 
       <!-- DOWNLOAD VIDEO SECTION -->
 
-      <h2 style="margin-bottom:16px;">Download Video</h2>
+      <h2 style="margin-bottom:16px;">Download A Video</h2>
 
-      <label style="font-size:22px" for="">Video Url</label>
-      <br>
-      <input type="text" class="youtubeUrl" value="https://www.youtube.com/watch?v=ZcAiayke00I" style="width:450px;text-align:center">
-
+      <label style="font-size:22px;margin-bottom: 0;" for="">Video Url</label>
       <br>
 
-      <button type="button" onclick="myFunction()" class="btn btn-primary" style="margin-top:7px;margin-bottom:32px;">Paste</button>
+      <!--<input type="text" class="youtubeUrl" value="https://www.youtube.com/watch?v=ZcAiayke00I" style="width:450px;text-align:center">-->
+
+      <input type="text" class="youtubeUrl" value="" style="width:450px;text-align:center;font-size:14px;">
 
       <br>
 
-      <label style="font-size:22px" for="">Save As Title</label>
+      <button type="button" onclick="myFunction()" class="btn btn-primary btn-sm" style="margin-top:7px;margin-bottom:32px;">Paste</button>
+
       <br>
-      <input type="text" class="saveAsTitle" value=""  style="text-align:center;width:600px;margin-bottom:9px;">
+
+      <label style="font-size:22px;margin-bottom: 0;" for="">Title</label>
+
+      <br>
+
+
+      <input type="text" class="saveAsTitle" value=""  style="text-align:center;width:600px;margin-bottom:9px;font-size:19px;">
       <br>
 
       <!-- SELECT DIRECTORY SECTION -->
@@ -47,12 +54,15 @@
       <!--<br>-->
       <!--<br>-->
 
+      <br>
+
       <label for="" style="margin-right: 7px;">Download As Audio</label>
       <input type="checkbox" class="downloadAsAudio">
       <br>
       <button class="startDownload btn btn-success" style="height: 43px;width: 180px;font-size: 20px;margin-top:20px;">Start Download</button>
       <br>
-      <h6 class="percentage" style="height:70px;overflow:hidden;margin-top:30px;">Status: Download Hasn't Started Yet</h6>
+      <br>
+      <h5 class="percentage" style="height:40px;overflow:hidden;margin-top: 23px;margin-bottom: 25px;font-size:22px;">Status: Download Hasn't Started Yet</h5>
 
        <!--YOUTUBE DOWNLOADER-->
 
