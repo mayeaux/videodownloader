@@ -33,8 +33,8 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // keep video
   arguments.push('-k');
 
-  // verbose output
-  arguments.push('-f', 'best');
+  // // verbose output
+  arguments.push('-f', 'bestvideo+bestaudio/best');
 
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
