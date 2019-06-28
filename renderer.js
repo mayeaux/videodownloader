@@ -7,6 +7,8 @@ const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
 const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
+const {dialog} = require('electron').remote;
+
 
 
 // create videos file if doesn't exist
@@ -37,8 +39,10 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
+  const filePath = '/Users/anthony/Development/ytdldesktop/thinger/electron-quick-start/videos/Nick Fuentes';
+
   // save to videos directory
-  arguments.push('-o', `videos/${fileName}.%(ext)s`);
+  arguments.push('-o', `${filePath}/${fileName}.%(ext)s`);
 
   console.log(arguments);
 
@@ -161,3 +165,10 @@ function myFunction() {
 
 
 }
+
+var path1 = dialog.showOpenDialog({
+  defaultPath: './videos',
+  properties: ['openDirectory']
+});
+
+console.log(path1);
