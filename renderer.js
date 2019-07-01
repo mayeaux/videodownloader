@@ -253,13 +253,6 @@ function youtubeDlInfoAsync(url, options) {
   });
 }
 
-const saveToDirectory = './videos';
-
-var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
-selectVideoDirectoryInput.value = saveToDirectory;
-
-
-
 // frontend code
 function myFunction() {
 
@@ -318,13 +311,23 @@ function myChannelFunction() {
 
 }
 
-// const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
-//   var path1 = dialog.showOpenDialog({
-//     defaultPath: './videos',
-//     properties: ['openDirectory']
-//   });
-//
-//   console.log(path1);
-// }
-//
-//
+/** SELECT DIRECTORY **/
+
+const saveToDirectory = './videos';
+
+var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+selectVideoDirectoryInput.value = saveToDirectory;
+
+const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
+  var path1 = dialog.showOpenDialog({
+    defaultPath: './videos',
+    properties: ['openDirectory']
+  });
+
+  selectVideoDirectoryInput.value = path1;
+
+
+  console.log(path1);
+}
+
+
