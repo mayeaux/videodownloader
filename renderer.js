@@ -209,12 +209,27 @@ function myFunction() {
       if(isBrighteonDownload){
         options = ['-f bestvideo']
       } else {
-        options = ["-j", "--flat-playlist"];
+        options = ["-j", "--flat-playlist", '--dump-single-json'];
       }
 
       const info = await youtubeDlInfoAsync(text, options);
 
-      saveAsTitle.value = info.title;
+      if(info.length){
+        const playlistinfo = info[info.length -1];
+
+        const uploader = playlistinfo.uploader;
+        const amountOfUploads = playlistinfo.entries.length;
+
+        console.log(uploader, amountOfUploads);
+
+        saveAsTitle.value = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
+        console.log('an array')
+      } else {
+        saveAsTitle.value = info.title;
+
+        console.log('single item')
+      }
+
 
       console.log(info);
 
