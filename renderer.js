@@ -54,11 +54,17 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
+
+
+  // TODO: here is something
+
   const filePath = __dirname + '/videos';
+
+  const fileExtension = `%(ext)s`
 
 
   // save to videos directory
-  arguments.push('-o', `${filePath}/${fileName}.%(ext)s`);
+  arguments.push('-o', `${filePath}/${fileName}.${fileExtension}`);
 
   console.log(arguments);
 
@@ -330,13 +336,17 @@ const selectVideoDirectory = document.getElementsByClassName('selectVideoDirecto
 
   var newThing = selectedPath[0].split(__dirname)[1];
 
-  console.log(newThing);
+  // console.log(newThing);
+
+  const adjustedUrlWithCurrentDirectory = `.${newThing}`;
+
+  console.log(adjustedUrlWithCurrentDirectory);
 
 
-  selectVideoDirectoryInput.value = `.${newThing}`;
+  selectVideoDirectoryInput.value = adjustedUrlWithCurrentDirectory;
 
-  if (!fs.existsSync(selectVideoDirectoryInput)){
-    fs.mkdirSync(selectVideoDirectoryInput);
+  if (!fs.existsSync(adjustedUrlWithCurrentDirectory)){
+    fs.mkdirSync(adjustedUrlWithCurrentDirectory);
   }
 
 
