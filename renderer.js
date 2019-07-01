@@ -35,15 +35,9 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // verbose output
   arguments.push('-v');
 
-  // keep video
-  // arguments.push('-k');
-
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
-  // arguments.push('-f');
-
   arguments.push('--add-metadata');
-
 
   // select download as audio or video
   if(downloadAsAudio){
@@ -51,11 +45,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
     arguments.push('bestaudio');
     // can add something here later
-  } else if (false){
-    arguments.push('-f');
-
-    arguments.push('bestvideo');
-  } else {
+  }  else {
     // arguments.push('best');
   }
 
@@ -86,7 +76,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   console.log(__dirname);
 
-  let toAttachToDirname = inputtedUrl
+  let toAttachToDirname = inputtedUrl;
 
   // remove dot to fix path
   while(toAttachToDirname.charAt(0) === '.')
@@ -109,13 +99,12 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   console.log(arguments);
 
+  // deleted for now since it requires ffmpeg
   // download as audio if needed
   // if(downloadAsAudio){
   //   console.log('Download as audio');
   //   arguments.push('-x');
   // }
-
-  // const youtubeBinaryFilePath = `/usr/local/bin/youtube-dl`;
 
   const youtubeBinaryFilePath = 'node_modules/youtube-dl/bin/youtube-dl';
 
@@ -137,14 +126,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   ls.on('close', (code) => {
 
+    // clear out inputs after
     youtubeUrl.value = '';
     saveAsTitleValue.value = '';
 
-    // downloaded++;// if(downloaded == needsToDownload){
-    //   downloading = false;
-    //   console.log('no longer downloading');
-    // }
-
+    // if it ends successfully say download completed
     if(code == 0){
       percentage.innerText = 'Download completed';
     }
@@ -211,9 +197,7 @@ function myFunction() {
 
   var youtubeUrlValue = youtubeUrl.value;
 
-
-
-
+  /** WHEN PASTED **/
   navigator.clipboard.readText()
     .then(async text => {
       // update frontend to reflect text from clipboard
@@ -228,13 +212,6 @@ function myFunction() {
         options = ["-j", "--flat-playlist"];
       }
 
-      // Optional arguments passed to youtube-dl.
-      // var options = [];
-      // var options = ['-f', 'bestvideo'];
-
-      // options = [] works on Twitter, YouTube but not Brighteon
-      // options = ['-f', 'bestvideo'] works on YouTube, Brighteon, but not Twitter
-
       const info = await youtubeDlInfoAsync(text, options);
 
       saveAsTitle.value = info.title;
@@ -244,24 +221,6 @@ function myFunction() {
     })
     .catch(err => {
       console.log(err);
-
-      // document.getElementById("demo").innerHTML = 'Failed to read clipboard contents: '+err;
-    });
-
-
-}
-
-// frontend code
-function myChannelFunction() {
-
-  navigator.clipboard.readText()
-    .then(text => {
-      document.getElementsByClassName("youtubeChannelUrl")[0].value = text;
-
-    })
-    .catch(err => {
-      console.log(err);
-
     });
 
 
@@ -298,16 +257,12 @@ const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
 
   // console.log(newThing);
 
-
-
-
   selectVideoDirectoryInput.value = adjustedUrlWithCurrentDirectory;
 
   if (!fs.existsSync(adjustedUrlWithCurrentDirectory)){
     fs.mkdirSync(adjustedUrlWithCurrentDirectory);
   }
 
-
-}
+};
 
 

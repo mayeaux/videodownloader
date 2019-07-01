@@ -100,3 +100,19 @@ function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTit
 //   downloadChannel(youtubeChannelUrlValue, youtubeChannelUrlValue, downloadChannelAsAudioValue, youtubeChannelUrl, '');
 //
 // };
+
+// frontend code
+function myChannelFunction() {
+
+  navigator.clipboard.readText()
+    .then(text => {
+      document.getElementsByClassName("youtubeChannelUrl")[0].value = text;
+
+    })
+    .catch(err => {
+      console.log(err);
+
+    });
+
+
+}
