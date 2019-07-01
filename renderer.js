@@ -319,15 +319,27 @@ var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDire
 selectVideoDirectoryInput.value = saveToDirectory;
 
 const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
-  var path1 = dialog.showOpenDialog({
+
+  // get path from electron and load it as selectedPath
+  var selectedPath = dialog.showOpenDialog({
     defaultPath: './videos',
     properties: ['openDirectory']
   });
 
-  selectVideoDirectoryInput.value = path1;
+  console.log(selectedPath[0]);
+
+  var newThing = selectedPath[0].split(__dirname)[1];
+
+  console.log(newThing);
 
 
-  console.log(path1);
+  selectVideoDirectoryInput.value = `.${newThing}`;
+
+  if (!fs.existsSync(selectVideoDirectoryInput)){
+    fs.mkdirSync(selectVideoDirectoryInput);
+  }
+
+
 }
 
 
