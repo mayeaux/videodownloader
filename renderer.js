@@ -55,10 +55,17 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   // // verbose output
 
+  console.log(title);
+
+  if(title){
+    title = title.replace(/\//g , '_');
+    console.log('replacing');
+  }
+
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
-
+  console.log(title);
 
   // TODO: here is something
 
