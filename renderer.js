@@ -54,8 +54,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
-  // const filePath = '/Users/anthony/Development/ytdldesktop/thinger/electron-quick-start/videos/Keemstar';
-
   const filePath = __dirname + '/videos';
 
 
@@ -70,7 +68,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
     arguments.push('-x');
   }
 
-  const ls = spawn('node_modules/youtube-dl/bin/youtube-dl', arguments);
+  // const youtubeBinaryFilePath = `/usr/local/bin/youtube-dl`;
+
+  const youtubeBinaryFilePath = 'node_modules/youtube-dl/bin/youtube-dl';
+
+  const ls = spawn(youtubeBinaryFilePath, arguments);
 
   ls.stdout.on('data', (data) => {
     percentage.innerText = data;
@@ -225,21 +227,22 @@ function downloadChannel(url, channelUrl, downloadAsAudio, youtubeUrl, saveAsTit
   });
 }
 
-
-var startChannelDownload =  document.getElementsByClassName('startChannelDownload')[0];
-
-
-startChannelDownload.onclick = function(){
-
-  var youtubeChannelUrl = document.getElementsByClassName('youtubeChannelUrl')[0];
-  var downloadChannelAsAudio =document.getElementsByClassName('downloadChannelAsAudio')[0];
-
-  var youtubeChannelUrlValue = youtubeChannelUrl.value;
-  var downloadChannelAsAudioValue = downloadChannelAsAudio.checked;
-
-  downloadChannel(youtubeChannelUrlValue, youtubeChannelUrlValue, downloadChannelAsAudioValue, youtubeChannelUrl, '');
-
-};
+/** START CHANNEL DOWNLOAD SECTION **/
+//
+// var startChannelDownload =  document.getElementsByClassName('startChannelDownload')[0];
+//
+//
+// startChannelDownload.onclick = function(){
+//
+//   var youtubeChannelUrl = document.getElementsByClassName('youtubeChannelUrl')[0];
+//   var downloadChannelAsAudio =document.getElementsByClassName('downloadChannelAsAudio')[0];
+//
+//   var youtubeChannelUrlValue = youtubeChannelUrl.value;
+//   var downloadChannelAsAudioValue = downloadChannelAsAudio.checked;
+//
+//   downloadChannel(youtubeChannelUrlValue, youtubeChannelUrlValue, downloadChannelAsAudioValue, youtubeChannelUrl, '');
+//
+// };
 
 function youtubeDlInfoAsync(url, options) {
   return new Promise(function(resolve, reject) {
@@ -249,6 +252,11 @@ function youtubeDlInfoAsync(url, options) {
     });
   });
 }
+
+const saveToDirectory = './videos';
+
+var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+selectVideoDirectoryInput.value = saveToDirectory;
 
 
 
@@ -272,8 +280,8 @@ function myFunction() {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
       // Optional arguments passed to youtube-dl.
-      // var options = [];
-      var options = ['-f', 'bestvideo'];
+      var options = [];
+      // var options = ['-f', 'bestvideo'];
 
       // options = [] works on Twitter, YouTube but not Brighteon
       // options = ['-f', 'bestvideo'] works on YouTube, Brighteon, but not Twitter

@@ -47,12 +47,17 @@
       <input type="text" class="saveAsTitle" value=""  style="text-align:center;width:100%;margin-bottom:9px;font-size:19px;">
       <br>
 
-      <!-- SELECT DIRECTORY SECTION -->
+       <!--SELECT DIRECTORY SECTION-->
 
-      <!--<label for="" style="font-size: 12px">Custom Directory (Optional)</label>-->
-      <!--<button class="selectVideoDirectory">Select Directory</button>-->
-      <!--<br>-->
-      <!--<br>-->
+      <br>
+      <label for="" style="font-size: 19px">Directory</label>
+
+      <input type="text" class="selectVideoDirectoryInput" value=""  style="text-align:center;width:100%;margin-bottom:9px;font-size:19px;">
+
+      <button type="button" class="btn btn-primary btn-sm selectVideoDirectory" style="margin-top:7px;margin-bottom:32px;">Select Directory</button>
+
+      <br>
+      <br>
 
       <br>
 
@@ -111,4 +116,8 @@
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>
+    <script>
+//      var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+//      selectVideoDirectoryInput.value = './videos';
+    </script>
 </html>
