@@ -241,6 +241,16 @@ startChannelDownload.onclick = function(){
 
 };
 
+function youtubeDlInfoAsync(url, options) {
+  return new Promise(function(resolve, reject) {
+    youtubedl.getInfo(url, options, function(err, data) {
+      if (err !== null) reject(err);
+      else resolve(data);
+    });
+  });
+}
+
+
 
 // frontend code
 function myFunction() {
@@ -258,25 +268,21 @@ function myFunction() {
 
 
   navigator.clipboard.readText()
-    .then(text => {
+    .then(async text => {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
       // Optional arguments passed to youtube-dl.
-      var options = ['-f' , 'bestvideo'];
-      youtubedl.getInfo(text, options, function(err, info) {
-        if (err) throw err;
+      // var options = [];
+      var options = ['-f', 'bestvideo'];
 
-        saveAsTitle.value = info.title;
-        console.log(info);
+      // options = [] works on Twitter, YouTube but not Brighteon
+      // options = ['-f', 'bestvideo'] works on YouTube, Brighteon, but not Twitter
 
-        // console.log('id:', info.id);
-        // console.log('title:', info.title);
-        // console.log('url:', info.url);
-        // console.log('thumbnail:', info.thumbnail);
-        // console.log('description:', info.description);
-        // console.log('filename:', info._filename);
-        // console.log('format id:', info.format_id);
-      });
+      const info = await youtubeDlInfoAsync(text, options);
+
+      saveAsTitle.value = info.title;
+
+      console.log(info);
 
     })
     .catch(err => {
