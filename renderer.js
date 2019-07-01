@@ -110,10 +110,10 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   console.log(arguments);
 
   // download as audio if needed
-  if(downloadAsAudio){
-    console.log('Download as audio');
-    arguments.push('-x');
-  }
+  // if(downloadAsAudio){
+  //   console.log('Download as audio');
+  //   arguments.push('-x');
+  // }
 
   // const youtubeBinaryFilePath = `/usr/local/bin/youtube-dl`;
 
