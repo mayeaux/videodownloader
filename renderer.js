@@ -124,7 +124,8 @@ var openFolder = document.getElementsByClassName('openFolder')[0];
 // percentage div
 var percentage = document.getElementsByClassName('percentage')[0];
 
-
+// select video input
+var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
 
 openFolder.onclick = function(){
   shell.openItem('./videos');
@@ -321,10 +322,11 @@ function myChannelFunction() {
 
 const saveToDirectory = './videos';
 
-var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
 selectVideoDirectoryInput.value = saveToDirectory;
 
-const selectVideoDirectory = document.getElementsByClassName('selectVideoDirectory')[0].onclick = function(){
+const selectVideoDirectoryButton = document.getElementsByClassName('selectVideoDirectory')[0]
+
+const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
 
   // get path from electron and load it as selectedPath
   var selectedPath = dialog.showOpenDialog({
