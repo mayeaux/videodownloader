@@ -44,11 +44,17 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   arguments.push('--add-metadata');
 
+
   // select download as audio or video
   if(downloadAsAudio){
     arguments.push('-f');
 
     arguments.push('bestaudio');
+    // can add something here later
+  } else if (false){
+    arguments.push('-f');
+
+    arguments.push('bestvideo');
   } else {
     // arguments.push('best');
   }
@@ -72,7 +78,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   let inputtedUrl = selectVideoDirectoryInput.value;
 
   console.log(inputtedUrl);
-  console.log('hersd')
 
   // create
   if (!fs.existsSync(inputtedUrl)){
@@ -83,6 +88,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   let toAttachToDirname = inputtedUrl
 
+  // remove dot to fix path
   while(toAttachToDirname.charAt(0) === '.')
   {
     toAttachToDirname = toAttachToDirname.substr(1);
@@ -312,8 +318,17 @@ function myFunction() {
     .then(async text => {
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
+      const isBitreonDownload = false // regexp here
+
+      let options;
+      if(isBitreonDownload){
+        options = ['-f bestvideo']
+      } else {
+        options = [];
+      }
+
       // Optional arguments passed to youtube-dl.
-      var options = [];
+      // var options = [];
       // var options = ['-f', 'bestvideo'];
 
       // options = [] works on Twitter, YouTube but not Brighteon
