@@ -225,7 +225,7 @@ function myFunction() {
       if(isBrighteonDownload){
         options = ['-f bestvideo']
       } else {
-        options = [];
+        options = ["-j", "--flat-playlist"];
       }
 
       // Optional arguments passed to youtube-dl.
@@ -285,13 +285,20 @@ const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
 
   console.log(selectedPath[0]);
 
+  // test if it's a shorter url because its within contained
   var newThing = selectedPath[0].split(__dirname)[1];
+
+  let adjustedUrlWithCurrentDirectory;
+  if(newThing){
+    adjustedUrlWithCurrentDirectory = `.${newThing}`;
+  } else {
+    adjustedUrlWithCurrentDirectory = selectedPath[0]
+  }
+  console.log(newThing);
 
   // console.log(newThing);
 
-  const adjustedUrlWithCurrentDirectory = `.${newThing}`;
 
-  console.log(adjustedUrlWithCurrentDirectory);
 
 
   selectVideoDirectoryInput.value = adjustedUrlWithCurrentDirectory;
