@@ -20,6 +20,9 @@ if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
 
+// select video input
+var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
 function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
@@ -39,6 +42,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   // arguments.push('-f');
 
+  arguments.push('--add-metadata');
 
   // select download as audio or video
   if(downloadAsAudio){
@@ -58,13 +62,37 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   // TODO: here is something
 
-  const filePath = __dirname + '/videos';
+  let inputtedUrl = selectVideoDirectoryInput.value;
 
-  const fileExtension = `%(ext)s`
+  console.log(inputtedUrl);
+  console.log('hersd')
 
+  // create
+  if (!fs.existsSync(inputtedUrl)){
+    fs.mkdirSync(inputtedUrl);
+  }
+
+  console.log(__dirname);
+
+  let toAttachToDirname = inputtedUrl
+
+  while(toAttachToDirname.charAt(0) === '.')
+  {
+    toAttachToDirname = toAttachToDirname.substr(1);
+  }
+
+
+  const filePath = __dirname + toAttachToDirname;
+
+  const fileExtension = `%(ext)s`;
+
+  let saveToFolder = `${filePath}/${fileName}.${fileExtension}`;
+
+
+  console.log(saveToFolder);
 
   // save to videos directory
-  arguments.push('-o', `${filePath}/${fileName}.${fileExtension}`);
+  arguments.push('-o', saveToFolder);
 
   console.log(arguments);
 
@@ -124,8 +152,6 @@ var openFolder = document.getElementsByClassName('openFolder')[0];
 // percentage div
 var percentage = document.getElementsByClassName('percentage')[0];
 
-// select video input
-var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
 
 openFolder.onclick = function(){
   shell.openItem('./videos');
