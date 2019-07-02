@@ -54,6 +54,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   arguments.push('--add-metadata');
 
+  arguments.push('--ffmpeg-location');
+
+  arguments.push(ffmpegPath);
+
+
   // select download as audio or video
   if(downloadAsAudio){
     arguments.push('-f');
