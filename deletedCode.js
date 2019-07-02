@@ -116,3 +116,40 @@ function myChannelFunction() {
 
 
 }
+
+
+
+// <!--YOUTUBE DOWNLOADER-->
+//
+// <!--<br>-->
+// <!--<br>-->
+//
+//
+// <!--<br>-->
+// <!--<br>-->
+//
+// <!--<h2>YouTube Channel Downloader</h2>-->
+//
+// <!--<label for="">Channel Url</label>-->
+// <!--<input type="text" class="youtubeChannelUrl" value="https://www.youtube.com/user/NewDramaAlert" style="width:270px"><button onclick="myChannelFunction()">Paste</button>-->
+//   <!--<br>-->
+//   <!--<br>-->
+//   <!--<label for="">Download As Audio</label>-->
+// <!--<input type="checkbox" class="downloadChannelAsAudio">-->
+//   <!--<br>-->
+//   <!--<br>-->
+//   <!--<button class="startChannelDownload btn btn-success" style="margin-bottom:73px">Start Downloading Channel</button>-->
+//
+// <!--<br>-->
+
+
+
+
+// <!--console.log('Download started');-->
+// <!--console.log('filename: ' + info._filename);-->
+// <!--console.log('size: ' + info.size);-->
+//
+//
+// <!--We are using Node.js <span id="node-version"></span>,-->
+// <!--Chromium <span id="chrome-version"></span>,-->
+// <!--and Electron <span id="electron-version"></span>.-->
