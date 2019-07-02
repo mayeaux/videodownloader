@@ -203,18 +203,68 @@ function youtubeDlInfoAsync(url, options) {
   });
 }
 
-// frontend code
-function myFunction() {
-
-  var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
-  var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
+async function populateTitle(){
   var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
 
-  // var saveAsTitleValue = saveAsTitle.value;
+  let text = document.getElementsByClassName("youtubeUrl")[0].value;
 
 
-  var youtubeUrlValue = youtubeUrl.value;
 
+  const isBrighteonDownload = text.match('brighteon');
+
+  let options;
+  if(isBrighteonDownload){
+    options = ['-f bestvideo']
+  } else {
+    options = ["-j", "--flat-playlist", '--dump-single-json'];
+  }
+
+  const info = await youtubeDlInfoAsync(text, options);
+
+  // if its a playlist or channel
+  if(info.length > 2){
+    console.log(info);
+
+    const playlistinfo = info[info.length -1];
+
+    const uploader = playlistinfo.uploader;
+    const amountOfUploads = playlistinfo.entries.length;
+
+    console.log(uploader, amountOfUploads);
+
+    downloadPlaylistText.innerHTML = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
+    playlistDownloadingDiv.style.display = '';
+    titleDiv.style.display = 'none';
+
+
+    selectVideoDirectoryInput.value = selectVideoDirectoryInput.value + '/' + uploader;
+
+    console.log('an array')
+  } else {
+
+
+    saveAsTitle.value = info[0].title;
+
+
+    playlistDownloadingDiv.style.display = 'none';
+    titleDiv.style.display = '';
+
+    console.log('single item')
+  }
+
+
+  console.log(info);
+}
+
+// literally impossible to get to work
+// document.getElementById('saveAsTitle').addEventListener('blur',  (event) => {
+//   console.log('hello');
+//   console.log(event);
+// });
+
+
+// frontend code
+function myFunction() {
 
   /** WHEN PASTED **/
   navigator.clipboard.readText()
@@ -222,50 +272,7 @@ function myFunction() {
       // update frontend to reflect text from clipboard
       document.getElementsByClassName("youtubeUrl")[0].value = text;
 
-      const isBrighteonDownload = text.match('brighteon');
-
-      let options;
-      if(isBrighteonDownload){
-        options = ['-f bestvideo']
-      } else {
-        options = ["-j", "--flat-playlist", '--dump-single-json'];
-      }
-
-      const info = await youtubeDlInfoAsync(text, options);
-
-      if(info.length > 2){
-        console.log(info);
-
-        const playlistinfo = info[info.length -1];
-
-        const uploader = playlistinfo.uploader;
-        const amountOfUploads = playlistinfo.entries.length;
-
-        console.log(uploader, amountOfUploads);
-
-        downloadPlaylistText.innerHTML = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
-        playlistDownloadingDiv.style.display = '';
-        titleDiv.style.display = 'none';
-
-
-        selectVideoDirectoryInput.value = selectVideoDirectoryInput.value + '/' + uploader;
-
-        console.log('an array')
-      } else {
-
-
-        saveAsTitle.value = info[0].title;
-
-
-        playlistDownloadingDiv.style.display = 'none';
-        titleDiv.style.display = '';
-
-        console.log('single item')
-      }
-
-
-      console.log(info);
-
+      await populateTitle();
     })
     .catch(err => {
       console.log(err);
