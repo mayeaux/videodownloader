@@ -23,6 +23,12 @@ if (!fs.existsSync(dir)){
 // select video input
 var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
 
+var playlistDownloadingDiv = document.getElementsByClassName('playlistDownloadingDiv')[0];
+
+var titleDiv = document.getElementsByClassName('titleDiv')[0];
+
+var downloadPlaylistText = document.getElementsByClassName('downloadPlaylistText')[0];
+
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
 function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
@@ -126,6 +132,9 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   ls.on('close', (code) => {
 
+    playlistDownloadingDiv.style.display = 'none';
+    titleDiv.style.display = '';
+
     // clear out inputs after
     youtubeUrl.value = '';
     saveAsTitleValue.value = '';
@@ -204,13 +213,6 @@ function myFunction() {
   var youtubeUrlValue = youtubeUrl.value;
 
 
-  var playlistDownloadingDiv = document.getElementsByClassName('playlistDownloadingDiv')[0];
-
-  var titleDiv = document.getElementsByClassName('titleDiv')[0];
-
-  var downloadPlaylistText = document.getElementsByClassName('downloadPlaylistText')[0];
-
-
   /** WHEN PASTED **/
   navigator.clipboard.readText()
     .then(async text => {
@@ -248,6 +250,10 @@ function myFunction() {
         console.log('an array')
       } else {
         saveAsTitle.value = info[0].title;
+
+
+        playlistDownloadingDiv.style.display = 'none';
+        titleDiv.style.display = '';
 
         console.log('single item')
       }
