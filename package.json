@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.19",
-    "fluent-ffmpeg": "^2.1.2",
     "youtube-dl": "^2.0.0",
     "ytdl-core": "^0.29.2"
   }
