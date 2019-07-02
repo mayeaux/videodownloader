@@ -20,6 +20,12 @@ npm install
 npm start
 ```
 
+Then paste a URL into the Video Url input, can either be a single video or a playlist, it should autopopulate the Title at which point you can change the title or the given save directory.
+
+## Disclaimer
+
+It is your responsibility to know whether your usage conflicts with a platform's given TOS, app creators accept no responsibility for misuse of this application
+
 ## License
 
 [CC0 1.0 (Public Domain)](LICENSE.md)
