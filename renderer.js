@@ -5,18 +5,29 @@
 var fs = require('fs');
 const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
-const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
-
-
+const {shell} = require('electron');
+const homedir = require('os').homedir();
 const {dialog} = require('electron').remote;
 
+
+// const ffmpeg   = require('fluent-ffmpeg');
+
+const ffmpeg = require('@ffmpeg-installer/ffmpeg');
+
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+
+console.log(ffmpegPath);
+
+
 // create videos file if doesn't exist
-var dir = './videos';
+var dir = `${homedir}/videodownloadervideos`;
 
 if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
+
+console.log(youtubedl);
 
 // select video input
 var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
@@ -42,6 +53,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   // arguments.push('-f', 'bestvideo+bestaudio/best');
 
   arguments.push('--add-metadata');
+
+  arguments.push('--ffmpeg-location');
+
+  arguments.push(ffmpegPath);
+
 
   // select download as audio or video
   if(downloadAsAudio){
@@ -81,16 +97,18 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   console.log(__dirname);
 
-  let toAttachToDirname = inputtedUrl;
+  // let toAttachToDirname = inputtedUrl;
+  //
+  // // remove dot to fix path
+  // while(toAttachToDirname.charAt(0) === '.')
+  // {
+  //   toAttachToDirname = toAttachToDirname.substr(1);
+  // }
+  //
+  //
+  // const filePath = __dirname + toAttachToDirname;
 
-  // remove dot to fix path
-  while(toAttachToDirname.charAt(0) === '.')
-  {
-    toAttachToDirname = toAttachToDirname.substr(1);
-  }
-
-
-  const filePath = __dirname + toAttachToDirname;
+  const filePath = inputtedUrl;
 
   const fileExtension = `%(ext)s`;
 
@@ -111,7 +129,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   //   arguments.push('-x');
   // }
 
-  const youtubeBinaryFilePath = 'node_modules/youtube-dl/bin/youtube-dl';
+  const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
+
+  console.log(youtubeBinaryFilePath);
+
+  console.log(arguments);
 
   const ls = spawn(youtubeBinaryFilePath, arguments);
 
@@ -167,11 +189,8 @@ var percentage = document.getElementsByClassName('percentage')[0];
 
 
 openFolder.onclick = function(){
-  shell.openItem('./videos');
+  shell.openItem(dir);
 };
-
-const {shell} = require('electron');
-
 
 startDownload.onclick = function(){
 
@@ -284,7 +303,7 @@ function myFunction() {
 
 /** SELECT DIRECTORY **/
 
-const saveToDirectory = './videos';
+const saveToDirectory = dir
 
 selectVideoDirectoryInput.value = saveToDirectory;
 
