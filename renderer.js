@@ -247,8 +247,8 @@ function myFunction() {
         playlistDownloadingDiv.style.display = '';
         titleDiv.style.display = 'none';
 
-        selectVideoDirectoryInput.value = './videos/' + uploader;
 
+        selectVideoDirectoryInput.value = selectVideoDirectoryInput.value + '/' + uploader;
 
         console.log('an array')
       } else {
