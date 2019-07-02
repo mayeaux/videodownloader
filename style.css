@@ -1,0 +1,50 @@
+body {
+  font-size: 20px;
+}
+
+p {
+  margin: 5px;
+}
+
+div.sup {
+  text-align: center
+}
+
+h1 {
+  font-size: 1.50em;
+}
+
+h2 {
+  font-size: 1.33em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1.10em;
+}
+
+a.codelink {
+  color: black;
+  font-size: 12px;
+}
+
+label {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+input {
+  width: 450px;
+  text-align: center;
+  font-size: 17px;
+  width: 50%;
+}
+
+div.playlistDownloading {
+  height: 10px;
+  display: none;
+}
+
