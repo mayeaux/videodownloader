@@ -186,6 +186,8 @@ startDownload.onclick = function(){
 
   download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue, youtubeUrl, saveAsTitle);
 
+  percentage.scrollIntoView();
+
 
 
 };
