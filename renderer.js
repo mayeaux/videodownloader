@@ -7,12 +7,12 @@ const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
 const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
-
-
+const {shell} = require('electron');
+const homedir = require('os').homedir();
 const {dialog} = require('electron').remote;
 
 // create videos file if doesn't exist
-var dir = './videos';
+var dir = `${homedir}/videodownloadervideos`;
 
 if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
@@ -81,16 +81,18 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   console.log(__dirname);
 
-  let toAttachToDirname = inputtedUrl;
+  // let toAttachToDirname = inputtedUrl;
+  //
+  // // remove dot to fix path
+  // while(toAttachToDirname.charAt(0) === '.')
+  // {
+  //   toAttachToDirname = toAttachToDirname.substr(1);
+  // }
+  //
+  //
+  // const filePath = __dirname + toAttachToDirname;
 
-  // remove dot to fix path
-  while(toAttachToDirname.charAt(0) === '.')
-  {
-    toAttachToDirname = toAttachToDirname.substr(1);
-  }
-
-
-  const filePath = __dirname + toAttachToDirname;
+  const filePath = inputtedUrl;
 
   const fileExtension = `%(ext)s`;
 
@@ -167,11 +169,8 @@ var percentage = document.getElementsByClassName('percentage')[0];
 
 
 openFolder.onclick = function(){
-  shell.openItem('./videos');
+  shell.openItem(dir);
 };
-
-const {shell} = require('electron');
-
 
 startDownload.onclick = function(){
 
@@ -284,7 +283,7 @@ function myFunction() {
 
 /** SELECT DIRECTORY **/
 
-const saveToDirectory = './videos';
+const saveToDirectory = dir
 
 selectVideoDirectoryInput.value = saveToDirectory;
 
