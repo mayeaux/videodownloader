@@ -214,7 +214,9 @@ function myFunction() {
 
       const info = await youtubeDlInfoAsync(text, options);
 
-      if(info.length){
+      if(info.length > 2){
+        console.log(info);
+
         const playlistinfo = info[info.length -1];
 
         const uploader = playlistinfo.uploader;
@@ -225,7 +227,7 @@ function myFunction() {
         saveAsTitle.value = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
         console.log('an array')
       } else {
-        saveAsTitle.value = info.title;
+        saveAsTitle.value = info[0].title;
 
         console.log('single item')
       }
