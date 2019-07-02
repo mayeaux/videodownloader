@@ -11,8 +11,6 @@ var youtubedl = require('youtube-dl');
 
 const {dialog} = require('electron').remote;
 
-
-
 // create videos file if doesn't exist
 var dir = './videos';
 
@@ -262,6 +260,9 @@ async function populateTitle(){
 //   console.log(event);
 // });
 
+document.getElementsByClassName('youtubeUrl')[0].onblur = async function(){
+  await populateTitle();
+};
 
 // frontend code
 function myFunction() {
