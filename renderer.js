@@ -59,6 +59,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   console.log(title);
 
+  // replace forward slashes with underscores
   if(title){
     title = title.replace(/\//g , '_');
     console.log('replacing');
@@ -241,8 +242,6 @@ function myFunction() {
         const amountOfUploads = playlistinfo.entries.length;
 
         console.log(uploader, amountOfUploads);
-
-        saveAsTitle.value = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
 
         downloadPlaylistText.innerHTML = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
         playlistDownloadingDiv.style.display = '';
