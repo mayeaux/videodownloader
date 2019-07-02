@@ -1,20 +1,17 @@
 {
-  "name": "electron-quick-start",
+  "name": "videodownloader",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A video and channel downloader that supports 110 websites, powered by Electron and youtube-dl",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/mayeaux/videodownloader",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "youtube-dl"
   ],
-  "author": "GitHub",
+  "author": "Mayeaux",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^5.0.5"
