@@ -2,6 +2,9 @@
 
 ## Powered by Electron and YouTube-DL
 
+![alt text](https://user-images.githubusercontent.com/7200471/60479531-6273aa00-9c43-11e9-9b69-c250776efbc1.png)
+
+
 ## To Use
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
