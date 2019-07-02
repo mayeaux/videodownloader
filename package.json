@@ -10,7 +10,7 @@
     "dist": "build"
   },
   "build": {
-    "asar" : false,
+    "asar": false,
     "appId": "yourappid",
     "dmg": {
       "contents": [
@@ -49,6 +49,7 @@
     "electron-builder": "^20.44.4"
   },
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.19",
     "@microlink/youtube-dl": "^2.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "youtube-dl": "^2.0.0",

@@ -5,11 +5,20 @@
 var fs = require('fs');
 const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
-const ffmpeg   = require('fluent-ffmpeg');
 var youtubedl = require('youtube-dl');
 const {shell} = require('electron');
 const homedir = require('os').homedir();
 const {dialog} = require('electron').remote;
+
+
+// const ffmpeg   = require('fluent-ffmpeg');
+
+const ffmpeg = require('@ffmpeg-installer/ffmpeg');
+
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+
+console.log(ffmpegPath);
+
 
 // create videos file if doesn't exist
 var dir = `${homedir}/videodownloadervideos`;
