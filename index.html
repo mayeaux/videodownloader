@@ -5,68 +5,86 @@
     <title>YouTube Downloader</title>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
-    <div class="sup">
+    <div class="sup" style="text-align:center">
+
       <!-- HEADEDR INFO -->
-      <h1>Video Downloader</h1>
-      <p>
-        <a href="https://ytdl-org.github.io/youtube-dl/supportedsites.html" target="_blank">110 Sites Supported</a>
-      </p>
-      <p>
-        <a href="https://github.com/mayeaux/videodownloader" target="_blank" class="codelink">Code available at mayeaux/videodownloader</a>
-      </p>
-      <hr/>
+
+      <h1 style="margin-top: 30px;margin-bottom: 18px;">Video Downloader</h1>
+
+      <a href="https://ytdl-org.github.io/youtube-dl/supportedsites.html" target="_blank"><p>110 Sites Supported</p></a>
+
+      <a href="https://github.com/mayeaux/videodownloader" target="_blank" style="color:black"><p style="font-size:12px">Code available at mayeaux/videodownloader</p></a>
+
+
+      <br>
+      <br>
+
       <!-- DOWNLOAD VIDEO SECTION -->
-      <h2>Download A Video</h2>
-      <p><label for="youtubeUrl">Video Url</label></p>
-      <p>
-        <input type="text" name="youtubeUrl" class="youtubeUrl" value=""  style="">
-      </p>
-      <p>
-        <button type="button" onclick="myFunction()" class="btn btn-primary btn-sm">Paste</button>
-      </p>
 
-      <p><label for="saveAsTitle">Title</label></p>
-      <p>
-        <input type="text" class="saveAsTitle" name="saveAsTitle" id="saveAsTitle" value="">
-      </p>
+      <h2 style="margin-bottom:16px;">Download A Video</h2>
 
-      <div class="playlistDownloading">
-        <h3># Item Playlist or Channel To Be Downloaded</h3>
+      <label style="font-size:22px;margin-bottom: 0;" for="">Video Url</label>
+      <br>
+
+      <input type="text" class="youtubeUrl" value=""  style="width:450px;text-align:center;font-size:17px;width:100%;">
+
+      <br>
+
+      <button type="button" onclick="myFunction()" class="btn btn-primary btn-sm" style="margin-top:7px;margin-bottom:32px;">Paste</button>
+
+      <br>
+      <div class="titleDiv" style="height:10px">
+        <label style="font-size:22px;margin-bottom: 0;" for="">Title</label>
+        <input type="text" class="saveAsTitle" id="saveAsTitle" value="" style="text-align:center;width:100%;margin-bottom:9px;font-size:17px;">
+
       </div>
 
+      <div class="playlistDownloadingDiv" style="height:10px;display:none;margin-bottom:-30px;">
+        <h4 class="downloadPlaylistText" style="font-size:22px"># Item Playlist or Channel To Be Downloaded`</h4>
+      </div>
+
+      <br>
+
+      <br>
+
        <!--SELECT DIRECTORY SECTION-->
-      <p>
-        <label for="directory">Directory</label>
-      </p>
 
-      <p>
-        <input type="text" name="directory" class="selectVideoDirectoryInput" value="" >
-      </p>
+      <br>
+      <label for="" style="font-size: 19px">Directory</label>
 
-      <p>
-        <button type="button" class="btn btn-primary btn-sm selectVideoDirectory">Select Directory</button>
-      </p>
+      <input type="text" class="selectVideoDirectoryInput" value=""  style="text-align:center;width:100%;margin-bottom:9px;font-size:17px;">
 
-      <p>
-        <label for="downloadAsAudio">Download As Audio</label>
-      </p>
-      <p>
-        <input type="checkbox" class="downloadAsAudio" name="downloadAsAudio">
-      </p>
+      <button type="button" class="btn btn-primary btn-sm selectVideoDirectory" style="margin-top:7px;margin-bottom:32px;">Select Directory</button>
 
-      <p>
-        <button class="startDownload btn btn-success">Start Download</button>
-      </p>
+      <br>
 
-      <code class="percentage">Status: Download Hasn't Started Yet</code>
+      <label for="" style="margin-right: 7px;margin-top:5px;">Download As Audio</label>
+      <input type="checkbox" class="downloadAsAudio">
+      <br>
+      <button class="startDownload btn btn-success" style="height: 43px;width: 180px;font-size: 20px;margin-top:20px;">Start Download</button>
+      <br>
+      <br>
+      <h5 class="percentage" style="height:52px;overflow:hidden;margin-top: 23px;margin-bottom: 15px;font-size:22px;">Status: Download Hasn't Started Yet</h5>
 
-      <p>
-        <button class="openFolder btn btn-info btn-sm">Open Videos Folder</button>
-      </p>
+
+
+      <button class="openFolder btn btn-info btn-sm">Open Videos Folder</button>
+      <br>
+      <br>
+      <br>
+
+
     </div>
+
+
+
     <script src="./renderer.js"></script>
   </body>
+    <script>
+//      var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+//      selectVideoDirectoryInput.value = './videos';
+    </script>
 </html>
