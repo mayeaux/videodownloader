@@ -8,3 +8,6 @@
 //   }
 // })
 
+
+// removed from package.json
+// "postinstall": "install-app-deps",
