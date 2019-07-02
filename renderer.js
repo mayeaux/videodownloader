@@ -152,6 +152,12 @@ var openFolder = document.getElementsByClassName('openFolder')[0];
 var percentage = document.getElementsByClassName('percentage')[0];
 
 
+
+// playlistDownloadingDiv
+// titleDiv
+// downloadPlaylistText
+
+
 openFolder.onclick = function(){
   shell.openItem('./videos');
 };
@@ -197,6 +203,14 @@ function myFunction() {
 
   var youtubeUrlValue = youtubeUrl.value;
 
+
+  var playlistDownloadingDiv = document.getElementsByClassName('playlistDownloadingDiv')[0];
+
+  var titleDiv = document.getElementsByClassName('titleDiv')[0];
+
+  var downloadPlaylistText = document.getElementsByClassName('downloadPlaylistText')[0];
+
+
   /** WHEN PASTED **/
   navigator.clipboard.readText()
     .then(async text => {
@@ -225,6 +239,12 @@ function myFunction() {
         console.log(uploader, amountOfUploads);
 
         saveAsTitle.value = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
+
+        downloadPlaylistText.innerHTML = `${amountOfUploads} Item Playlist or Channel To Be Downloaded`;
+        playlistDownloadingDiv.style.display = '';
+        titleDiv.style.display = 'none';
+
+
         console.log('an array')
       } else {
         saveAsTitle.value = info[0].title;
