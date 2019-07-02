@@ -246,9 +246,13 @@ function myFunction() {
         playlistDownloadingDiv.style.display = '';
         titleDiv.style.display = 'none';
 
+        selectVideoDirectoryInput.value = './videos/' + uploader;
+
 
         console.log('an array')
       } else {
+
+
         saveAsTitle.value = info[0].title;
 
 
