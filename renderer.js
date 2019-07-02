@@ -18,6 +18,8 @@ if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
 
+console.log(youtubedl);
+
 // select video input
 var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
 
@@ -113,7 +115,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   //   arguments.push('-x');
   // }
 
-  const youtubeBinaryFilePath = 'node_modules/youtube-dl/bin/youtube-dl';
+  const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
+
+  console.log(youtubeBinaryFilePath);
+
+  console.log(arguments);
 
   const ls = spawn(youtubeBinaryFilePath, arguments);
 
