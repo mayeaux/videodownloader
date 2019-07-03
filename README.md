@@ -4,6 +4,10 @@
 
 ![alt text](https://user-images.githubusercontent.com/7200471/60479531-6273aa00-9c43-11e9-9b69-c250776efbc1.png)
 
+##
+Installer for OS X available: [Here](https://github.com/mayeaux/videodownloader/releases/download/1.0.0/videodownloader-1.0.0.dmg)
+
+Installers for Windows and Linux to come
 
 ## To Use
 
