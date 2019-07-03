@@ -66,6 +66,13 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
     arguments.push('-f');
 
     arguments.push('bestaudio');
+
+    arguments.push('--extract-audio');
+
+    arguments.push('--audio-format');
+
+    arguments.push('mp3');
+
     // can add something here later
   }  else {
     // arguments.push('best');
