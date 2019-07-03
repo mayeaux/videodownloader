@@ -65,7 +65,10 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   if(downloadAsAudio){
     arguments.push('-f');
 
-    arguments.push('bestaudio[ext!=webm]');
+    arguments.push('bestaudio');
+
+
+    // arguments.push('bestaudio[ext!=webm]');
 
     /** conversion taking too long atm **/
     // arguments.push('--extract-audio');
