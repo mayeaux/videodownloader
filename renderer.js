@@ -233,17 +233,16 @@ function youtubeDlInfoAsync(url, options) {
   });
 }
 
-async function populateTitle(){
+async function populateTitle() {
   var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
 
   let text = document.getElementsByClassName("youtubeUrl")[0].value;
 
 
-
   const isBrighteonDownload = text.match('brighteon');
 
   let options;
-  if(isBrighteonDownload){
+  if (isBrighteonDownload) {
     options = ['-f bestvideo']
   } else {
     options = ["-j", "--flat-playlist", '--dump-single-json'];
@@ -252,10 +251,10 @@ async function populateTitle(){
   const info = await youtubeDlInfoAsync(text, options);
 
   // if its a playlist or channel
-  if(info.length > 2){
+  if (info.length > 2) {
     console.log(info);
 
-    const playlistinfo = info[info.length -1];
+    const playlistinfo = info[info.length - 1];
 
     const uploader = playlistinfo.uploader;
     const amountOfUploads = playlistinfo.entries.length;
@@ -270,7 +269,7 @@ async function populateTitle(){
     selectVideoDirectoryInput.value = selectVideoDirectoryInput.value + '/' + uploader;
 
     console.log('an array')
-  } else {
+  } else if (info.length == 2) {
 
 
     saveAsTitle.value = info[0].title;
@@ -280,6 +279,20 @@ async function populateTitle(){
     titleDiv.style.display = '';
 
     console.log('single item')
+
+
+  } else if (info && info.title){
+
+    saveAsTitle.value = info.title;
+
+
+    playlistDownloadingDiv.style.display = 'none';
+    titleDiv.style.display = '';
+
+    console.log('single item')
+
+  } else {
+    console.log('ERROR')
   }
 
 
