@@ -65,13 +65,14 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   if(downloadAsAudio){
     arguments.push('-f');
 
-    arguments.push('bestaudio');
+    arguments.push('bestaudio[ext!=webm]');
 
-    arguments.push('--extract-audio');
-
-    arguments.push('--audio-format');
-
-    arguments.push('mp3');
+    /** conversion taking too long atm **/
+    // arguments.push('--extract-audio');
+    //
+    // arguments.push('--audio-format');
+    //
+    // arguments.push('mp3');
 
     // can add something here later
   }  else {
