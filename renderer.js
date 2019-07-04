@@ -2,7 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var fs = require('fs');
+var fs = require('fs-extra');
 const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
 var youtubedl = require('youtube-dl');
@@ -65,10 +65,10 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   if(downloadAsAudio){
     arguments.push('-f');
 
-    arguments.push('bestaudio');
+    // arguments.push('bestaudio');
 
 
-    // arguments.push('bestaudio[ext!=webm]');
+    arguments.push('bestaudio[ext!=webm]');
 
     /** conversion taking too long atm **/
     // arguments.push('--extract-audio');
@@ -105,7 +105,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   // create
   if (!fs.existsSync(inputtedUrl)){
-    fs.mkdirSync(inputtedUrl);
+    fs.mkdirp(inputtedUrl);
   }
 
   console.log(__dirname);
