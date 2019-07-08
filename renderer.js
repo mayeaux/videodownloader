@@ -258,9 +258,6 @@ async function populateTitle() {
     selectVideoDirectoryInput.value =
       selectVideoDirectoryInput.value + '/' + uploader;
 
-    selectVideoDirectoryInput.value =
-      selectVideoDirectoryInput.value + '/' + uploader;
-
     console.log('an array');
   } else if (info.length == 2) {
     saveAsTitle.value = info[0].title;
