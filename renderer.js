@@ -2,20 +2,30 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var fs = require("fs");
+var fs = require("fs-extra");
 const spawn = require("child_process").spawn;
 const ytdl = require("ytdl-core");
-const ffmpeg = require("fluent-ffmpeg");
 var youtubedl = require("youtube-dl");
-
+const { shell } = require("electron");
+const homedir = require("os").homedir();
 const { dialog } = require("electron").remote;
 
+// const ffmpeg   = require('fluent-ffmpeg');
+
+const ffmpeg = require("@ffmpeg-installer/ffmpeg");
+
+const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+
+console.log(ffmpegPath);
+
 // create videos file if doesn't exist
-var dir = "./videos";
+var dir = `${homedir}/videodownloadervideos`;
 
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
+
+console.log(youtubedl);
 
 // select video input
 var selectVideoDirectoryInput = document.getElementsByClassName(
@@ -46,11 +56,27 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
 
   arguments.push("--add-metadata");
 
+  arguments.push("--ffmpeg-location");
+
+  arguments.push(ffmpegPath);
+
+  arguments.push("--no-mtime");
+
   // select download as audio or video
   if (downloadAsAudio) {
     arguments.push("-f");
 
-    arguments.push("bestaudio");
+    // arguments.push('bestaudio');
+
+    arguments.push("bestaudio[ext!=webm]");
+
+    /** conversion taking too long atm **/
+    // arguments.push('--extract-audio');
+    //
+    // arguments.push('--audio-format');
+    //
+    // arguments.push('mp3');
+
     // can add something here later
   } else {
     // arguments.push('best');
@@ -79,19 +105,23 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
 
   // create
   if (!fs.existsSync(inputtedUrl)) {
-    fs.mkdirSync(inputtedUrl);
+    fs.mkdirp(inputtedUrl);
   }
 
   console.log(__dirname);
 
-  let toAttachToDirname = inputtedUrl;
+  // let toAttachToDirname = inputtedUrl;
+  //
+  // // remove dot to fix path
+  // while(toAttachToDirname.charAt(0) === '.')
+  // {
+  //   toAttachToDirname = toAttachToDirname.substr(1);
+  // }
+  //
+  //
+  // const filePath = __dirname + toAttachToDirname;
 
-  // remove dot to fix path
-  while (toAttachToDirname.charAt(0) === ".") {
-    toAttachToDirname = toAttachToDirname.substr(1);
-  }
-
-  const filePath = __dirname + toAttachToDirname;
+  const filePath = inputtedUrl;
 
   const fileExtension = `%(ext)s`;
 
@@ -111,7 +141,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
   //   arguments.push('-x');
   // }
 
-  const youtubeBinaryFilePath = "node_modules/youtube-dl/bin/youtube-dl";
+  const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
+
+  console.log(youtubeBinaryFilePath);
+
+  console.log(arguments);
 
   const ls = spawn(youtubeBinaryFilePath, arguments);
 
@@ -158,10 +192,8 @@ var percentage = document.getElementsByClassName("percentage")[0];
 // downloadPlaylistText
 
 openFolder.onclick = function() {
-  shell.openItem("./videos");
+  shell.openItem(dir);
 };
-
-const { shell } = require("electron");
 
 startDownload.onclick = function() {
   var youtubeUrl = document.getElementsByClassName("youtubeUrl")[0];
@@ -226,14 +258,29 @@ async function populateTitle() {
     selectVideoDirectoryInput.value =
       selectVideoDirectoryInput.value + "/" + uploader;
 
+    selectVideoDirectoryInput.value =
+      selectVideoDirectoryInput.value + "/" + uploader;
+
     console.log("an array");
-  } else {
+  } else if (info.length == 2) {
     saveAsTitle.value = info[0].title;
 
     playlistDownloadingDiv.style.display = "none";
     titleDiv.style.display = "";
 
+    playlistDownloadingDiv.style.display = "none";
+    titleDiv.style.display = "";
+
     console.log("single item");
+  } else if (info && info.title) {
+    saveAsTitle.value = info.title;
+
+    playlistDownloadingDiv.style.display = "none";
+    titleDiv.style.display = "";
+
+    console.log("single item");
+  } else {
+    console.log("ERROR");
   }
 
   console.log(info);
@@ -267,7 +314,7 @@ function myFunction() {
 
 /** SELECT DIRECTORY **/
 
-const saveToDirectory = "./videos";
+const saveToDirectory = dir;
 
 selectVideoDirectoryInput.value = saveToDirectory;
 

@@ -1,27 +1,57 @@
 {
-  "name": "electron-quick-start",
+  "name": "videodownloader",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A video and channel downloader that supports 110 websites, powered by Electron and youtube-dl",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build",
+    "build": "build"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "build": {
+    "asar": false,
+    "appId": "yourappid",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "repository": "https://github.com/mayeaux/videodownloader",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "youtube-dl"
   ],
-  "author": "GitHub",
+  "author": "Mayeaux",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.5"
+    "electron": "^5.0.5",
+    "electron-builder": "^20.44.4"
   },
   "dependencies": {
-    "@microlink/youtube-dl": "^2.0.0",
-    "fluent-ffmpeg": "^2.1.2",
+    "@ffmpeg-installer/ffmpeg": "^1.0.19",
+    "fs-extra": "^8.1.0",
     "youtube-dl": "^2.0.0",
     "ytdl-core": "^0.29.2"
   }
