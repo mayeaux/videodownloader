@@ -6,7 +6,7 @@ var fs = require('fs-extra');
 const spawn = require('child_process').spawn;
 const ytdl = require('ytdl-core');
 var youtubedl = require('youtube-dl');
-const {shell} = require('electron');
+const { shell } = require('electron');
 const homedir = require('os').homedir();
 const {dialog} = require('electron').remote;
 
@@ -24,28 +24,31 @@ const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
 
 console.log(`youtube-dl binary path: ${youtubeBinaryFilePath}`);
 
-
 // create videos file if doesn't exist
 var dir = `${homedir}/videodownloadervideos`;
 
-if (!fs.existsSync(dir)){
+if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 }
 
 
 // select video input
-var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
+var selectVideoDirectoryInput = document.getElementsByClassName(
+  'selectVideoDirectoryInput'
+)[0];
 
-var playlistDownloadingDiv = document.getElementsByClassName('playlistDownloadingDiv')[0];
+var playlistDownloadingDiv = document.getElementsByClassName(
+  'playlistDownloadingDiv'
+)[0];
 
 var titleDiv = document.getElementsByClassName('titleDiv')[0];
 
-var downloadPlaylistText = document.getElementsByClassName('downloadPlaylistText')[0];
-
+var downloadPlaylistText = document.getElementsByClassName(
+  'downloadPlaylistText'
+)[0];
 
 // var url = 'https://www.youtube.com/watch?v=ZcAiayke00I';
-function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
-
+function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
   let arguments = [];
 
   // set the url for ytdl
@@ -64,13 +67,11 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   arguments.push('--no-mtime');
 
-
   // select download as audio or video
-  if(downloadAsAudio){
+  if (downloadAsAudio) {
     arguments.push('-f');
 
     // arguments.push('bestaudio');
-
 
     arguments.push('bestaudio[ext!=webm]');
 
@@ -82,7 +83,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
     // arguments.push('mp3');
 
     // can add something here later
-  }  else {
+  } else {
     // arguments.push('best');
   }
 
@@ -91,8 +92,8 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   console.log(title);
 
   // replace forward slashes with underscores
-  if(title){
-    title = title.replace(/\//g , '_');
+  if (title) {
+    title = title.replace(/\//g, '_');
     console.log('replacing');
   }
 
@@ -108,7 +109,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   console.log(inputtedUrl);
 
   // create
-  if (!fs.existsSync(inputtedUrl)){
+  if (!fs.existsSync(inputtedUrl)) {
     fs.mkdirp(inputtedUrl);
   }
 
@@ -131,7 +132,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   let saveToFolder = `${filePath}/${fileName}.${fileExtension}`;
 
-
   console.log(saveToFolder);
 
   // save to videos directory
@@ -150,22 +150,19 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
 
   const ls = spawn(youtubeBinaryFilePath, arguments);
 
-  ls.stdout.on('data', (data) => {
+  ls.stdout.on('data', data => {
     percentage.innerText = data;
-
 
     console.log(`stdout: ${data}`);
   });
 
-  ls.stderr.on('data', (data) => {
+  ls.stderr.on('data', data => {
     percentage.innerText = data;
-
 
     console.log(`stderr: ${data}`);
   });
 
-  ls.on('close', (code) => {
-
+  ls.on('close', code => {
     playlistDownloadingDiv.style.display = 'none';
     titleDiv.style.display = '';
 
@@ -174,7 +171,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
     saveAsTitleValue.value = '';
 
     // if it ends successfully say download completed
-    if(code == 0){
+    if (code == 0) {
       percentage.innerText = 'Download completed';
     }
 
@@ -182,24 +179,18 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   });
 }
 
-
 // start download button
 var startDownload = document.getElementsByClassName('startDownload')[0];
-
 
 // open folder button
 var openFolder = document.getElementsByClassName('openFolder')[0];
 
-
 // percentage div
 var percentage = document.getElementsByClassName('percentage')[0];
-
-
 
 // playlistDownloadingDiv
 // titleDiv
 // downloadPlaylistText
-
 
 openFolder.onclick = function(){
 
@@ -209,8 +200,7 @@ openFolder.onclick = function(){
   shell.openItem(value);
 };
 
-startDownload.onclick = function(){
-
+startDownload.onclick = function() {
   var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
   var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
   var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
@@ -219,14 +209,16 @@ startDownload.onclick = function(){
   var saveAsTitleValue = saveAsTitle.value;
   var downloadAsAudioValue = downloadAsAudio.checked;
 
-  download(youtubeUrlValue, saveAsTitleValue, downloadAsAudioValue, youtubeUrl, saveAsTitle);
+  download(
+    youtubeUrlValue,
+    saveAsTitleValue,
+    downloadAsAudioValue,
+    youtubeUrl,
+    saveAsTitle
+  );
 
   percentage.scrollIntoView();
-
-
-
 };
-
 
 function youtubeDlInfoAsync(url, options) {
   return new Promise(function(resolve, reject) {
@@ -240,16 +232,15 @@ function youtubeDlInfoAsync(url, options) {
 async function populateTitle() {
   var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
 
-  let text = document.getElementsByClassName("youtubeUrl")[0].value;
-
+  let text = document.getElementsByClassName('youtubeUrl')[0].value;
 
   const isBrighteonDownload = text.match('brighteon');
 
   let options;
   if (isBrighteonDownload) {
-    options = ['-f bestvideo']
+    options = ['-f bestvideo'];
   } else {
-    options = ["-j", "--flat-playlist", '--dump-single-json'];
+    options = ['-j', '--flat-playlist', '--dump-single-json'];
   }
 
   const info = await youtubeDlInfoAsync(text, options);
@@ -269,36 +260,30 @@ async function populateTitle() {
     playlistDownloadingDiv.style.display = '';
     titleDiv.style.display = 'none';
 
+    selectVideoDirectoryInput.value =
+      selectVideoDirectoryInput.value + '/' + uploader;
 
-    selectVideoDirectoryInput.value = selectVideoDirectoryInput.value + '/' + uploader;
-
-    console.log('an array')
+    console.log('an array');
   } else if (info.length == 2) {
-
-
     saveAsTitle.value = info[0].title;
 
+    playlistDownloadingDiv.style.display = 'none';
+    titleDiv.style.display = '';
 
     playlistDownloadingDiv.style.display = 'none';
     titleDiv.style.display = '';
 
-    console.log('single item')
-
-
-  } else if (info && info.title){
-
+    console.log('single item');
+  } else if (info && info.title) {
     saveAsTitle.value = info.title;
 
-
     playlistDownloadingDiv.style.display = 'none';
     titleDiv.style.display = '';
 
-    console.log('single item')
-
+    console.log('single item');
   } else {
-    console.log('ERROR')
+    console.log('ERROR');
   }
-
 
   console.log(info);
 }
@@ -309,38 +294,37 @@ async function populateTitle() {
 //   console.log(event);
 // });
 
-document.getElementsByClassName('youtubeUrl')[0].onblur = async function(){
+document.getElementsByClassName('youtubeUrl')[0].onblur = async function() {
   await populateTitle();
 };
 
 // frontend code
 function myFunction() {
-
   /** WHEN PASTED **/
-  navigator.clipboard.readText()
+  navigator.clipboard
+    .readText()
     .then(async text => {
       // update frontend to reflect text from clipboard
-      document.getElementsByClassName("youtubeUrl")[0].value = text;
+      document.getElementsByClassName('youtubeUrl')[0].value = text;
 
       await populateTitle();
     })
     .catch(err => {
       console.log(err);
     });
-
-
 }
 
 /** SELECT DIRECTORY **/
 
-const saveToDirectory = dir
+const saveToDirectory = dir;
 
 selectVideoDirectoryInput.value = saveToDirectory;
 
-const selectVideoDirectoryButton = document.getElementsByClassName('selectVideoDirectory')[0]
+const selectVideoDirectoryButton = document.getElementsByClassName(
+  'selectVideoDirectory'
+)[0];
 
-const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
-
+const selectVideoDirectory = (selectVideoDirectoryButton.onclick = function() {
   // get path from electron and load it as selectedPath
   var selectedPath = dialog.showOpenDialog({
     defaultPath: './videos',
@@ -353,10 +337,10 @@ const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
   var newThing = selectedPath[0].split(__dirname)[1];
 
   let adjustedUrlWithCurrentDirectory;
-  if(newThing){
+  if (newThing) {
     adjustedUrlWithCurrentDirectory = `.${newThing}`;
   } else {
-    adjustedUrlWithCurrentDirectory = selectedPath[0]
+    adjustedUrlWithCurrentDirectory = selectedPath[0];
   }
   console.log(newThing);
 
@@ -364,15 +348,11 @@ const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
 
   selectVideoDirectoryInput.value = adjustedUrlWithCurrentDirectory;
 
-  if (!fs.existsSync(adjustedUrlWithCurrentDirectory)){
+  if (!fs.existsSync(adjustedUrlWithCurrentDirectory)) {
     fs.mkdirSync(adjustedUrlWithCurrentDirectory);
   }
 
-};
-
-
-
-
+});
 
 const youtubeBinaryContainingFolder = '';
 
