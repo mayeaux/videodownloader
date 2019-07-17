@@ -10,6 +10,7 @@ const {shell} = require('electron');
 const homedir = require('os').homedir();
 const {dialog} = require('electron').remote;
 
+const downloader = require('./downloadBinary');
 
 // const ffmpeg   = require('fluent-ffmpeg');
 
@@ -17,7 +18,11 @@ const ffmpeg = require('@ffmpeg-installer/ffmpeg');
 
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
-console.log(ffmpegPath);
+console.log(`ffmpeg path: ${ffmpegPath}`);
+
+const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
+
+console.log(`youtube-dl binary path: ${youtubeBinaryFilePath}`);
 
 
 // create videos file if doesn't exist
@@ -27,7 +32,6 @@ if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
 
-console.log(youtubedl);
 
 // select video input
 var selectVideoDirectoryInput = document.getElementsByClassName('selectVideoDirectoryInput')[0];
@@ -142,10 +146,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue){
   //   arguments.push('-x');
   // }
 
-  const youtubeBinaryFilePath = youtubedl.getYtdlBinary();
-
-  console.log(youtubeBinaryFilePath);
-
   console.log(arguments);
 
   const ls = spawn(youtubeBinaryFilePath, arguments);
@@ -202,7 +202,11 @@ var percentage = document.getElementsByClassName('percentage')[0];
 
 
 openFolder.onclick = function(){
-  shell.openItem(dir);
+
+  var value = document.getElementsByClassName('selectVideoDirectoryInput')[0].value;
+
+
+  shell.openItem(value);
 };
 
 startDownload.onclick = function(){
@@ -367,3 +371,19 @@ const selectVideoDirectory = selectVideoDirectoryButton.onclick = function(){
 };
 
 
+
+
+
+const youtubeBinaryContainingFolder = '';
+
+var t = youtubeBinaryContainingFolder;
+t = t.substr(0, t.lastIndexOf("\/"));
+
+console.log(t);
+
+
+
+downloader(t, function error(err, done) {
+  if (err) { return console.log(err.stack); }
+  console.log(done);
+});
