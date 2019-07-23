@@ -12,8 +12,6 @@ const {dialog} = require('electron').remote;
 
 const downloader = require('./downloadBinary');
 
-// const ffmpeg   = require('fluent-ffmpeg');
-
 const ffmpeg = require('@ffmpeg-installer/ffmpeg');
 
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
@@ -73,6 +71,7 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
 
     // arguments.push('bestaudio');
 
+    // don't want webm as audio
     arguments.push('bestaudio[ext!=webm]');
 
     /** conversion taking too long atm **/
@@ -84,8 +83,21 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
 
     // can add something here later
   } else {
+
+    // download as mp4 if it's youtube (tired of reconverting .flv files)
+    const isYouTubeDownload = url.match('youtube');
+    if(isYouTubeDownload){
+      console.log('downloading from youtube');
+
+      arguments.push('-f');
+
+      arguments.push('bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4');
+    }
+
     // arguments.push('best');
   }
+
+
 
   // // verbose output
 
@@ -102,8 +114,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
 
   console.log(title);
 
-  // TODO: here is something
-
   let inputtedUrl = selectVideoDirectoryInput.value;
 
   console.log(inputtedUrl);
@@ -114,17 +124,6 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
   }
 
   console.log(__dirname);
-
-  // let toAttachToDirname = inputtedUrl;
-  //
-  // // remove dot to fix path
-  // while(toAttachToDirname.charAt(0) === '.')
-  // {
-  //   toAttachToDirname = toAttachToDirname.substr(1);
-  // }
-  //
-  //
-  // const filePath = __dirname + toAttachToDirname;
 
   const filePath = inputtedUrl;
 
