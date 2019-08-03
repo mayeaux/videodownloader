@@ -353,16 +353,13 @@ const selectVideoDirectory = (selectVideoDirectoryButton.onclick = function() {
 
 });
 
-const youtubeBinaryContainingFolder = '';
 
-var t = youtubeBinaryContainingFolder;
-t = t.substr(0, t.lastIndexOf("\/"));
+const youtubeBinaryContainingFolder = youtubeBinaryFilePath.substr(0, youtubeBinaryFilePath.lastIndexOf("\/"));
 
-console.log(t);
+console.log(`youtubeBinaryContainingFolder: ${youtubeBinaryContainingFolder}`);
 
 
-
-downloader(t, function error(err, done) {
+downloader(youtubeBinaryContainingFolder, function error(err, done) {
   if (err) { return console.log(err.stack); }
   console.log(done);
 });
