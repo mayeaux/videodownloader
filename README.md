@@ -7,7 +7,7 @@
 ##
 Installer for OS X available: [Here](https://github.com/mayeaux/videodownloader/releases/download/1.0.0/videodownloader-1.0.0.dmg)
 
-Installers for Windows and Linux to come
+Installer for Windows available: [Here](https://github.com/mayeaux/videodownloader/releases/download/1.0.0/videodownloader.Setup.1.0.0.exe) 
 
 ## To Use
 
