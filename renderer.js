@@ -287,12 +287,6 @@ async function populateTitle() {
   console.log(info);
 }
 
-// literally impossible to get to work
-// document.getElementById('saveAsTitle').addEventListener('blur',  (event) => {
-//   console.log('hello');
-//   console.log(event);
-// });
-
 document.getElementsByClassName('youtubeUrl')[0].onblur = async function() {
   await populateTitle();
 };
@@ -353,12 +347,12 @@ const selectVideoDirectory = (selectVideoDirectoryButton.onclick = function() {
 
 });
 
-
+// remove youtubedl from pathname to give containing folder
 const youtubeBinaryContainingFolder = youtubeBinaryFilePath.substr(0, youtubeBinaryFilePath.lastIndexOf("\/"));
 
 console.log(`youtubeBinaryContainingFolder: ${youtubeBinaryContainingFolder}`);
 
-
+// update binary on boot
 downloader(youtubeBinaryContainingFolder, function error(err, done) {
   if (err) { return console.log(err.stack); }
   console.log(done);
