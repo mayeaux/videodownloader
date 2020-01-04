@@ -9,6 +9,8 @@ Installer for OS X available: [Here](https://github.com/mayeaux/videodownloader/
 
 Installer for Windows available: [Here](https://github.com/mayeaux/videodownloader/releases/download/1.0.0/videodownloader.Setup.1.0.0.exe) 
 
+NOTE: These installers are a bit outdated. The latest source code is your best bet as it has functionality to auto update youtube-dl on boot so it's always the latest version. I will recompile the app when I get a chance and update the executables here.
+
 ## To Use
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
