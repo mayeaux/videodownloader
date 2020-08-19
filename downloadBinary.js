@@ -21,7 +21,7 @@ function download (url, callback) {
   // download the correct version of the binary based on the platform
   url = exec(url)
 
-  request.get(url, { followRedirect: false }, function (err, res) {
+  request.get(url, { followRedirect: false, strictSSL: false }, function (err, res) {
     if (err) return callback(err)
 
     if (res.statusCode !== 302) {
@@ -34,7 +34,10 @@ function download (url, callback) {
     }
 
     const url = res.headers.location
-    const downloadFile = request.get(url)
+    const downloadFile = request.get({
+      url,
+      strictSSL: false
+    })
     const newVersion = /yt-dl\.org\/downloads\/(\d{4}\.\d\d\.\d\d(\.\d)?)\/youtube-dl/.exec(
       url
     )[1]
