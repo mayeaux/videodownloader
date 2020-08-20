@@ -109,6 +109,9 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
     console.log('replacing');
   }
 
+
+  // TODO: trim to max 255 letters
+
   // title is that passed or the one from youtube
   const fileName = title || '%(title)s';
 
@@ -199,6 +202,7 @@ openFolder.onclick = function(){
   shell.openItem(value);
 };
 
+
 startDownload.onclick = function() {
   var youtubeUrl = document.getElementsByClassName('youtubeUrl')[0];
   var downloadAsAudio = document.getElementsByClassName('downloadAsAudio')[0];
@@ -229,9 +233,13 @@ function youtubeDlInfoAsync(url, options) {
 }
 
 async function populateTitle() {
+
+  // get save as title div
   var saveAsTitle = document.getElementsByClassName('saveAsTitle')[0];
 
+  // get text from youtube url div value
   let text = document.getElementsByClassName('youtubeUrl')[0].value;
+
 
   const isBrighteonDownload = text.match('brighteon');
 
@@ -264,7 +272,12 @@ async function populateTitle() {
 
     console.log('an array');
   } else if (info.length == 2) {
-    saveAsTitle.value = info[0].title;
+
+    // TODO: trim here
+
+    const trimmedTitle = info[0].title.substring(0, 200);
+
+    saveAsTitle.value = trimmedTitle;
 
     playlistDownloadingDiv.style.display = 'none';
     titleDiv.style.display = '';
@@ -274,7 +287,11 @@ async function populateTitle() {
 
     console.log('single item');
   } else if (info && info.title) {
-    saveAsTitle.value = info.title;
+
+    const trimmedTitle = info.title.substring(0, 200);
+
+    // TODO: trim here
+    saveAsTitle.value = trimmedTitle;
 
     playlistDownloadingDiv.style.display = 'none';
     titleDiv.style.display = '';
@@ -294,12 +311,16 @@ document.getElementsByClassName('youtubeUrl')[0].onblur = async function() {
 // frontend code
 function myFunction() {
   /** WHEN PASTED **/
+
+  // get the copied text off the clipboard
   navigator.clipboard
     .readText()
     .then(async text => {
+
       // update frontend to reflect text from clipboard
       document.getElementsByClassName('youtubeUrl')[0].value = text;
 
+      //
       await populateTitle();
     })
     .catch(err => {
