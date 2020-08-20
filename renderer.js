@@ -64,6 +64,8 @@ function download(url, title, downloadAsAudio, youtubeUrl, saveAsTitleValue) {
   arguments.push(ffmpegPath);
 
   arguments.push('--no-mtime');
+  
+  arguments.push('--ignore-errors');
 
   // select download as audio or video
   if (downloadAsAudio) {
